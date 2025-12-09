@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wonderfully Weird World of Fahmy </title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400&display=swap" rel="stylesheet"> 
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    
+    <style>
+/* THEME PALETTE:
+    Primary Color (Green Sea): #2C3E50 (Dark Blue/Gray)
+    Accent Color (Concrete): #95A5A6 (Light Gray/Concrete)
+*/
+:root {
+    --primary-color: #2C3E50; /* Green Sea - Dark Accent */
+    --accent-color: #95A5A6; /* Concrete - Light Accent/Highlight */
+    --link-color: #95A5A6;
+    --border-color: #2C3E50;
+    --hover-bg: #2C3E50;
+    --hover-text: #ffffff;
+    --table-stripe: #ecf0f1; /* Lighter shade of concrete for stripes */
+}
+
+/* Global Reset and Utilities */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+a { text-decoration: none; color: var(--link-color); transition: color 0.3s ease; }
+a:hover { color: var(--hover-text); }
+
+/* --- 🦇 Background & Layout --- */
+body {
+    background-color: var(--primary-color); /* Changed from red */
+    font-size: 50px;
+    font-family: 'Poppins', Arial, sans-serif;
+    color: white;
+    background-image: url("backgroiubnd.jpg"); /* Original path preserved */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200vh;
+    gap: 2rem;
+    text-align: center;
+}
+
+/* 🧱 Main Container */
+.container {
+    max-width: 1100px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #000;
+    border-radius: 40px;
+    border: 6px solid var(--primary-color); /* Changed from red */
+    box-shadow: 0 10px 35px rgba(0,0,0,0.5);
+    overflow: hidden;
+    margin: 20px;
+    position: relative;
+}
+
+/* 🚀 Loading Screen Styles (Used for tab switching transition) */
+#page-loader {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.1s ease;
+}
+
+#page-loader.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.loader-spinner {
+    width: 70px;
+    height: 70px;
+    border: 8px solid #f3f3f3; 
+    border-top: 8px solid var(--primary-color); /* Changed from red */
+    border-radius: 50%;
+    animation: spin 10s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loader-text {
+    position: absolute;
+    margin-top: 100px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--primary-color); /* Changed from red */
+    opacity: 0.9;
+}
+
+/* --- Header & Clock --- */
+.live-clock-output {
+    font-size: 16px; 
+    font-weight: bold; 
+    background: rgba(44, 62, 80, 0.1); /* Use primary color with opacity */
+    padding: 8px 14px;
+    border-radius: 10px;
+    color: var(--primary-color); /* Changed from red */
+    text-align: center;
+    width: fit-content;
+    margin-left: auto;
+}
+
+
+header {
+    background: linear-gradient(135deg, #ffffff, var(--primary-color)); /* Changed red to primary */
+    color: #000000;
+    text-align: center;
+    padding: 60px 40px;
+    border-bottom: 6px solid var(--primary-color); /* Changed from red */
+}
+header h1 { font-size: 38px; margin-bottom: 5px; letter-spacing: 2px; font-family: 'Bebas Neue', sans-serif;}
+header h2 { font-size: 26px; margin-bottom: 10px; font-family: 'Bebas Neue', sans-serif; color: #fff;}
+header p { font-size: 16px; opacity: 0.9; }
+
+/* --- Tabs --- */
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    background: #fff;
+    border-bottom: 4px solid var(--primary-color); /* Changed from red */
+}
+.tab {
+    flex: 1;
+    text-align: center;
+    padding: 18px 0;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--primary-color); /* Changed from red */
+    transition: all 0.3s ease;
+    border-right: 1px solid var(--accent-color); /* Light border */
+}
+.tab:last-child { border-right: none; }
+.tab:hover { background: var(--hover-bg); color: var(--hover-text); } /* Dark background on hover */
+.tab.active { 
+    background: var(--primary-color); /* Changed from red */
+    color: #fff; 
+}
+
+/* --- Content & Headings --- */
+.tab-content {
+    display: none;
+    padding: 40px 50px;
+    animation: fadeIn 0.4s ease-in-out;
+    text-align: left;
+    line-height: 1.7;
+    font-size: 16px;
+}
+.tab-content.active { display: block; }
+
+h2 {
+    color: var(--primary-color); /* Changed from red */
+    margin-bottom: 20px;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid var(--primary-color); /* Changed from red */
+    padding-bottom: 8px;
+}
+.text-highlight {
+    color: var(--primary-color); /* Changed from red */
+}
+
+/* --- Overview Specific Styles --- */
+.profile-layout {
+    display: flex; 
+    align-items: flex-start; 
+    gap: 30px; 
+    margin-bottom: 25px; 
+    flex-wrap: wrap;
+}
+.profile-pic-container {
+    flex: 1; 
+    text-align: center;
+    min-width: 250px;
+}
+.profile-pic-img {
+    width: 280px; 
+    height: 380px; 
+    border-radius: 10px; 
+    border: 5px solid var(--primary-color); /* Changed from red */
+    box-shadow: 0 5px 15px rgba(44, 62, 80, 0.4); /* Shadow color updated */
+    object-fit: cover;
+    transition: all 0.4s ease-in-out;
+}
+.profile-pic-img:hover {
+    transform: scale(1.03); 
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 15px var(--primary-color); /* Shadow color updated */
+}
+.profile-desc {
+    flex: 2; 
+    text-align: justify;
+}
+.description-text {
+    font-size: 16px; 
+    line-height: 1.8; 
+    margin-bottom: 25px;
+    color: #333;
+}
+
+/* Biodata Card */
+.biodata-card {
+    background:#fff; 
+    border-radius:20px; 
+    border:5px solid var(--primary-color); /* Changed from red */
+    box-shadow:0 6px 25px rgba(0,0,0,0.25); 
+    padding:25px; 
+    margin-top:25px;
+    transition: all 0.4s ease;
+}
+.biodata-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 30px rgba(44, 62, 80, 0.4); /* Shadow color updated */
+}
+.biodata-card h3 {
+    color:var(--primary-color); /* Changed from red */
+    margin-bottom:15px; 
+    font-size:20px; 
+    text-transform:uppercase;
+}
+
+/* Table Styling */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 15px;
+    font-size: 15px;
+    border: 3px solid var(--primary-color); /* Changed from red */
+    border-radius: 12px;
+    overflow: hidden;
+    text-align: left;
+}
+th, td {
+    border: 1px solid var(--primary-color); /* Changed from red */
+    padding: 10px 14px;
+    text-align: left;
+}
+th { 
+    background-color: var(--primary-color); /* Changed from red */
+    color: #fff;
+    font-weight: bold; 
+    font-size: 16px; 
+}
+.table-row-odd { 
+    background-color: #fff; 
+    transition: background-color 0.3s ease;
+}
+.table-row-even { 
+    background-color: var(--table-stripe); /* Light gray for even rows */
+    transition: background-color 0.3s ease;
+}
+.table-row-odd:hover, .table-row-even:hover {
+    background-color: var(--accent-color); /* Concrete on hover */
+    cursor: default;
+}
+
+/* Spotify Player */
+.spotify-player {
+    border-radius:5px; 
+    margin-top:5px; 
+    box-shadow:0 5px 15px rgba(0,0,0,0.4);
+    border: 3px solid var(--primary-color); /* Changed from red */
+    transition: all 0.4s ease;
+}
+.spotify-player:hover {
+    transform: scale(1.01);
+    box-shadow: 0 8px 20px rgba(44, 62, 80, 0.4); /* Shadow color updated */
+}
+
+/* --- EDUCATION Specific Styles --- */
+.education-card {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    gap: 30px; 
+    flex-wrap: wrap; 
+    background:#fff; 
+    border-left:8px solid var(--primary-color); /* Changed from red */
+    border-radius:15px; 
+    padding:25px; 
+    box-shadow:0 5px 20px rgba(0,0,0,0.15);
+    transition: all 0.4s ease-in-out;
+}
+.education-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2), 0 0 10px rgba(44, 62, 80, 0.4); /* Shadow color updated */
+}
+
+.education-card-content {
+    flex: 1;
+}
+
+.education-card-img, .education-card-iframe {
+    width: 300px;
+    min-width: 250px;
+    height: 200px;
+    border-radius: 12px; 
+    border: 3px solid var(--primary-color); /* Changed from red */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    object-fit: cover;
+}
+
+/* --- EXPERIENCE DASHBOARD STYLES --- */
+.experience-dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px; 
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.exp-category-card {
+    flex: 1 1 280px; 
+    color: #fff;
+    padding: 30px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    border: 3px solid transparent; 
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Backgrounds updated to Primary/Darker shades */
+#work-card { background: linear-gradient(135deg, #2C3E50, #1c2a38); } 
+#volunteer-card { background: linear-gradient(135deg, #95A5A6, #7f8c8d); } /* Use concrete for lighter card */
+#sports-card { background: linear-gradient(135deg, #2C3E50, #1c2a38); }
+
+.exp-category-card:hover {
+    transform: translateY(-10px); 
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), 0 0 40px rgba(149, 165, 166, 0.7); /* Shadow color updated to concrete */
+    border-color: #ffffff; 
+}
+
+.exp-category-card.active {
+    border: 3px solid #ffffff;
+    background: #1c2a38 !important; /* Darker primary for active */
+    box-shadow: 0 0 20px rgba(149, 165, 166, 1); /* Shadow color updated to concrete */
+    transform: scale(1.05); 
+}
+
+/* Experience Details Cards */
+.experience-details-container {
+    padding: 20px 0;
+}
+.experience-details {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+.experience-details.active {
+    display: block; 
+}
+
+.card {
+    background-color: #f7f7f7; 
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 30px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease-in-out;
+}
+
+.experience-details .card:hover {
+    transform: translateY(-4px); 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2), 0 0 15px rgba(44, 62, 80, 0.7); /* Shadow color updated */
+}
+
+.detail-card-image {
+    width: 80%; 
+    max-width: 600px;
+    border-radius: 15px;
+    border: 3px solid var(--primary-color); /* Changed from red */
+    box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+    object-fit: cover;
+    height: auto; 
+    display: block; 
+    margin: 15px auto 0; 
+}
+
+
+/* --- GALLERY & MEDIA --- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.gallery-item {
+    border-radius: 12px;
+    border: 5px solid var(--primary-color); /* Changed from red */
+    overflow: hidden; 
+    transition: all 0.4s ease-in-out;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-item img,
+.gallery-item video {
+    width: 100%;
+    height: auto; 
+    display: block; 
+    transition: all 0.4s ease-in-out;
+}
+
+.gallery-item video {
+    min-height: 200px;
+}
+
+.gallery-item:hover {
+    transform: scale(1.03); 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 10px rgba(44, 62, 80, 0.6); /* Shadow color updated */
+    border-color: #000000; 
+    z-index: 10; 
+}
+.gallery-item:hover img,
+.gallery-item:hover video {
+    transform: scale(1.02) rotate(0.5deg); 
+}
+
+/* --- FAMILY SECTION STYLES --- */
+.family-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+.family-top {
+    margin-bottom: 50px;
+    gap: 80px; 
+}
+
+.family-member {
+    text-align: center;
+    background: rgba(250, 250, 250, 0.9); 
+    border: 4px solid var(--primary-color); /* Changed from red */
+    border-radius: 18px; 
+    padding: 25px;
+    width: 260px;
+    color: #fff; 
+    box-shadow: 0 8px 15px rgba(0,0,0,0.4);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); 
+    cursor: pointer;
+}
+.family-member:hover {
+    transform: scale(1.05) translateY(-7px); 
+    box-shadow: 0 20px 45px rgba(44, 62, 80, 0.6); /* Shadow color updated */
+    border-color: #ffffff;
+}
+
+/* ---> PARENTS IMAGE SIZE <--- */
+.family-member img {
+    width: 180px; 
+    height: 180px; 
+    border-radius: 50%;
+    border: 5px solid #fff;
+    margin-bottom: 15px;
+    object-fit: cover; 
+    transition: all 0.5s ease-in-out;
+}
+
+/* ---> SIBLINGS IMAGE SIZE <--- */
+.family-container.family-bottom .family-member img {
+    width: 150px; 
+    height: 150px;
+}
+
+.family-member:hover img {
+    transform: scale(1.03);
+    border-color: var(--primary-color); /* Changed from red */
+}
+.family-member p {
+    font-size: 16px; 
+    font-weight: 700;
+    margin-top: 5px;
+    color: var(--primary-color); /* Changed from red */
+    letter-spacing: 1px;
+}
+
+/* Social Media Icon Styles */
+.social-icons {
+    text-align: center; 
+    margin-top: 15px;
+}
+
+.fa {
+    padding: 15px;      
+    font-size: 24px;    
+    width: 50px;       
+    text-align: center; 
+    text-decoration: none; 
+    margin: 0 5px;      
+    border-radius: 50%; 
+    color: white;       
+    display: inline-block;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.fa:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
+}
+
+.fa-instagram {
+    /* Kept original gradient as it is standard for Instagram, changing base color might break recognition */
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+}
+
+.fa-whatsapp {
+    background-color: #25d366; /* Kept standard WhatsApp color */
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- 📱 RESPONSIVENESS (Media Queries) --- */
+@media (max-width: 1024px) {
+    .container {
+        max-width: 95%; 
+    }
+}
+
+@media (max-width:820px) {
+    /* Clocks now centered */
+    .live-clock-output {
+        margin: 10px auto;
+    }
+    header h1 { font-size: 30px; }
+    header h2 { font-size: 22px; }
+    .tab-content { padding: 25px; }
+    
+    /* Profile layout stacks */
+    .profile-layout { flex-direction: column; }
+    .profile-desc { text-align: center !important; }
+    .profile-pic-container { min-width: 100%; }
+    .profile-pic-img { margin: 0 auto; } 
+
+    /* Education cards stack */
+    .education-card {
+        flex-direction: column;
+    }
+    .education-card-img, .education-card-iframe {
+        width: 100%; 
+    }
+
+    /* Family cards stack */
+    .family-container {
+        gap: 30px;
+    }
+    .family-member {
+        width: 100%;
+        max-width: 300px;
+    }
+    .family-top {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+}
+    </style>
+</head>
+<body>
+    
+    <div id="page-loader">
+        <div class="loader-spinner"></div>
+        <p class="loader-text">Loading Section...</p>
+    </div>
+
+    <div id="live-clock" class="live-clock-output">
+        Loading clock...
+    </div>
+
+    <div class="container" id="top">
+        
+        <header>
+            <h2>The Wonderfully Weird World of..</h2>
+            <h1>Fahmy Izzuddin Bin Fairul Khairi</h1>
+            <p>Information Management Student | Science Information</p>
+
+            <div class="social-icons">
+                <a href="https://www.instagram.com/ffs.7_7?igsh=eWk4OXl0Znl3Y2Yw" class="fa fa-instagram"></a>
+                <a href="https://wa.me/qr/RNFYZLF6I7VCK1" class="fa fa-whatsapp"></a> 
+            </div>
+            
+        </header>
+
+        <div class="tabs">
+            <div class="tab active" data-tab="overview">Overview</div>
+            <div class="tab" data-tab="education">Education</div>
+            <div class="tab" data-tab="experience">Experience</div>
+            <div class="tab" data-tab="gallery">Gallery</div>
+            <div class="tab" data-tab="family">Family</div>
+        </div>
+
+        <div id="overview" class="tab-content active">
+            <h2>Overview</h2>
+
+            <div class="profile-layout">
+                
+                <div class="profile-pic-container">
+                    <img 
+                        src="fahmeh PFP.jpg"
+                        alt="Fahmy Izzuddin Profile Picture" 
+                        class="profile-pic-img">
+                </div>
+
+                <div class="profile-desc">
+                    <p class="description-text">
+                        <strong class="text-highlight">Driven by a deep sense of gratitude</strong> for every opportunity. 📜 My personal philosophy is simple:
+                            <strong class="text-highlight">Always be grateful for what I get and to gracefully let go if things didn't go on my way.</strong> This principle fuels my primary goal: to
+                            <strong class="text-highlight">become the best version of myself in every capacity.</strong> 🏅 My purpose extends beyond personal achievement; I strive to make all people around me proud through integrity and commitment.
+                            <strong class="text-highlight"> 💪 I prioritize lifelong wellness</strong>—a commitment to being physically and mentally healthy until the end. I believe that true success is built on
+                            resilience, gratitude, and continuous self-improvement, ensuring a life lived fully and without regret.
+                    </p>
+                </div>
+            </div>
+
+            <div class="biodata-card">
+                <h3> 📃Personal Biodata</h3>
+                <div id="biodata-clock" class="live-clock-output biodata-clock-display">
+                    Loading clock...
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 40%;">Detail</th>
+                            <th>Information</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-row-odd">
+                            <td><b>Full Name</b></td>
+                            <td>Fahmy Izzuddin Bin Fairul Khairi</td>
+                        </tr>
+                        <tr class="table-row-even">
+                            <td><b>Date of Birth</b></td>
+                            <td>25 May 2005</td>
+                        </tr>
+                        <tr class="table-row-odd">
+                            <td><b>Age</b></td>
+                            <td>20 Years Old</td>
+                        </tr>
+                        <tr class="table-row-even">
+                            <td><b>Gender</b></td>
+                            <td>Male</td>
+                        </tr>
+                        <tr class="table-row-odd">
+                            <td><b>Status</b></td>
+                            <td>Single</td>
+                        </tr>
+                        <tr class="table-row-even">
+                            <td><b>Address</b></td>
+                            <td>Sungai Buloh, Selangor, Malaysia</td>
+                        </tr>
+                        <tr class="table-row-odd">
+                            <td><b>Nationality</b></td>
+                            <td>Malaysian</td>
+                        </tr>
+                        <tr class="table-row-even">
+                            <td><b>Languages</b></td>
+                            <td>Bahasa Malaysia, English</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="text-highlight" style="font-size: 20px; margin-bottom: 15px; margin-top: 60px; text-align: center;"> 👏"Masterpieces" glazer 👏</h3> 
+            <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6BQynL5lCDgv2cYLZ4cuOu?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <div style="margin-top: 50px; text-align: right;">
+                <a href="#top" class="back-btn">Back to Top ↑</a>
+            </div>
+        </div>
+
+        <div id="education" class="tab-content">
+            <h2>Education Journey</h2>
+            <p style="text-align:center; color:#333; margin-bottom:25px;"></p>
+
+            <div style="display: flex; flex-direction: column; gap: 50px;">
+
+                <div class="education-card">
+                    
+                    <div class="education-card-content">
+                        <h3 class="text-highlight" style="margin-bottom:8px;">SK Bandar Baru Sri Damansara</h3>
+                        <p style="text-align: justify; line-height: 1.8; font-size: 15px;">
+                            My academic foundation began at <b>SK Bandar Baru Sri Damansara</b>, where I learned discipline,
+                            curiosity, and teamwork. The school encouraged leadership through group activities and programs,
+                            shaping my character from an early age. I achieved <b>UPSR results of 2B 2C 2D</b> not perfect, but it taught me resilience
+                            and the value of persistence as I moved forward to high school.
+                        </p>
+                    </div>
+
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!4v1730537595644!6m8!1m7!1sCIHM0ogKEICAgIDcj6D4Nw!2m2!1d3.206525!2d101.6245857!3f0!4f0!5f0.7820865974627469"
+                        class="education-card-iframe"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+
+                <div class="education-card">
+
+                    <img 
+                        src="EDUCATION/SK agama.jpeg"
+                        alt="KAFA INTEGRASI AL-MUHAJIRIN"
+                        class="education-card-img">
+
+                    <div class="education-card-content">
+                        <h3 class="text-highlight" style="margin-bottom:8px;">KAFA Integrasi Al-Muhajirin</h3>
+                        <p style="text-align: justify; line-height: 1.8; font-size: 15px;">
+                            After completing my early primary education, I attended <b>KAFA Integrasi Al-Muhajirin</b> to strengthen my understanding of 
+                            <b>Islamic studies, Quranic recitation (Tilawah), Fardhu Ain, and Arabic fundamentals</b>. 
+                            The school emphasized <b>discipline, akhlak (morality), and responsibility</b>, shaping both my character and faith. 
+                            Balancing academic and religious studies built strong ethics and focus on values I continue to apply in my education today.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="education-card">
+                    <img 
+                        src= "smk 2.jpeg"
+                        alt="SMK BANDAR SRI DAMANSARA 2"
+                        class="education-card-img">
+
+                    <div class="education-card-content">
+                        <h3 class="text-highlight" style="margin-bottom:8px;">SMK Bandar Sri Damansara 2</h3>
+                        <p style="text-align: justify; line-height: 1.8; font-size: 15px;">
+                            My upper secondary years at <b>SMK Bandar Sri Damansara 2</b> built my discipline and teamwork skills further. 
+                            I actively participated in academic and co-curricular programs, balancing studies with sports. 
+                            I completed my <b>SPM with 2A 5B 1C</b>, which helped me realize my interest in information management and technology.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="education-card">
+                    <div class="education-card-content">
+                        <h3 class="text-highlight" style="margin-bottom:8px;">Universiti Teknologi MARA (UiTM)</h3>
+                        <p style="text-align: justify; line-height: 1.8; font-size: 15px;">
+                            I am currently pursuing my <b>Diploma in Information Management</b> at <b>UiTM Segamat, Johor</b>. 
+                            The program strengthens my knowledge in <b>records management, data systems, and information governance</b>. 
+                            With a <b>CGPA above 3.00</b>, I continue to expand my academic and professional skills. 
+                            Beyond studies, I actively participate in sports — particularly <b>Handball</b> and represented UiTM in <b>KARISMA 2024</b>, where we secured 3rd place.
+                        </p>
+                    </div>
+
+                    <img 
+                        src="EDUCATION/uitm segamat.JPG"
+                        alt="UiTM Campus"
+                        class="education-card-img">
+                </div>
+            </div>
+
+            <div style="text-align: right; margin-top: 40px;">
+                <a href="#top" class="back-btn">Back to Top ↑</a>
+            </div>
+        </div>
+
+        <div id="experience" class="tab-content">
+            <h2>Experience Dashboard</h2>
+            <p style="text-align:center; color:#333; margin-bottom:25px;">
+                Just click on it 👆
+            </p>
+
+            <div class="experience-dashboard" id="experience-dashboard-main"> 
+                <div id="work-card" class="exp-category-card" data-exp-target="work-content">
+                    <h3>Work & Internship</h3>
+                    <p>Professional Roles and Training </p>
+                    <div style="position:absolute; top:15px; right:20px; font-size:40px; opacity:0.3;">💼</div>
+                </div>
+
+                <div id="volunteer-card" class="exp-category-card" data-exp-target="volunteer-content">
+                    <h3>Volunteer & Community</h3>
+                    <p>Service and Social Responsibility </p>
+                    <div style="position:absolute; top:15px; right:20px; font-size:40px; opacity:0.3;">🤝</div>
+                </div>
+
+                <div id="sports-card" class="exp-category-card" data-exp-target="sports-exp-content"> 
+                    <h3>Sports & Achievements</h3>
+                    <p>Competitions and Milestones </p>
+                    <div style="position:absolute; top:15px; right:20px; font-size:40px; opacity:0.3;">🏅</div>
+                </div>
+            </div>
+            
+            <div class="experience-details-container">
+                <div id="work-content" class="experience-details">
+                    <h3 class="text-highlight" style="margin-bottom: 20px;">Work & Internship Details</h3>
+                    
+                    <div class="card">
+                        <h3 class="text-highlight">Internship > Faculty of Law, Universiti Malaya</h3>
+                        <p><i>March 2025 – June 2025 | Kuala Lumpur, Malaysia</i></p>
+                        <ul>
+                            <li>Completed internship under the <b>Faculty of Law, Universiti Malaya</b>, focusing on record management and document handling systems.</li>
+                            <li>Assisted in organizing, labeling, and digitizing legal archives and reference materials.</li>
+                            <li>Learned professional office management, administrative procedures, and information confidentiality practices.</li>
+                            <li>Enhanced teamwork, communication, and analytical thinking in a formal institutional setting.</li>
+                        </ul>
+                        <div style="text-align:center;">
+                            <img src="intershiii/3.jpg" alt="Internship at Faculty of Law, UM" class="detail-card-image">
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="text-highlight">Shopee Warehouse Kepong Hub > Sorter</h3>
+                        <p><i>June 2023 : August 2023 | Kuala Lumpur, Malaysia</i></p>
+                        <ul>
+                            <li>Sorted parcels accurately according to designated shipping zones.</li>
+                            <li>Worked efficiently under pressure during high-volume operations.</li>
+                            <li>Collaborated effectively with warehouse supervisors and logistics staff.</li>
+                        </ul>
+                        <div style="text-align:center;">
+                            <img src="personal experiences/Maklumat-Shopee-Express-Kajang-Hub.jpg" alt="Shopee Warehouse Experience" class="detail-card-image">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="volunteer-content" class="experience-details">
+                    <h3 class="text-highlight" style="margin-bottom: 20px;">Volunteer & Community Details</h3>
+
+                    <div class="card">
+                        <h3 class="text-highlight">Ikhsan House Communities > Volunteer</h3>
+                        <p><i>2022 | Kuala Lumpur, Malaysia</i></p>
+                        <ul>
+                            <li>Organized and distributed donations for underprivileged families.</li>
+                            <li>Developed teamwork, empathy, and leadership through community service.</li>
+                            <li>Gained appreciation for social responsibility and collaboration.</li>
+                        </ul>
+                        <div style="text-align:center;">
+                            <img src="ehsan.jpg" alt="Ikhsan House Volunteer Work" class="detail-card-image">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="sports-exp-content" class="experience-details"> 
+                    <h3 class="text-highlight" style="margin-bottom: 20px;">Sports & Achievements Details</h3>
+                    
+                    <div class="card">
+                        <h3 class="text-highlight">KARISMA 2024 > UiTM University Sports Carnival</h3>
+                        <p><i>2024 | UiTM Segamat, Johor</i></p>
+                        <ul>
+                            <li>Represented UiTM Johor in the Handball event during KARISMA 2024.</li>
+                            <li>Achieved 3rd place at the national level, reflecting discipline and perseverance.</li>
+                            <li>Built teamwork and leadership through competitive sports.</li>
+                        </ul>
+                        <div style="text-align:center;">
+                            <img src="karisma 24/team.jpg" alt="KARISMA 2024 Team" class="detail-card-image">
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="text-highlight"> Varsity > Handball Tournement 2025</h3>
+                        <p><i>27 November | Universiti Malaysia Pahang Al-Sultan Abdullah, Pahang</i></p>
+                        <ul>
+                            <li>Represented UiTM Johor in the Handball open tournemant .</li>
+                            <li>Sadly lost in a group stage. Learn a harsh truth about self skills and learn to accepted defeat.</li>
+                            <li>Trying to know my self-confidences but didnt work. </li> 
+                            <li>Accepting my fate and socialize with my teammates.</li>
+                        </ul>
+                        <div style="text-align:center;">
+                            <img src="karisma 24/WhatsApp Image 2025-12-03 at 10.13.23_79d9a667.jpg" alt="Handball Tournament 2025" class="detail-card-image">
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: right; margin-top: 40px;">
+                    <a href="#top" class="back-btn">Back to Top ↑</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="gallery" class="tab-content">
+            <h2>Gallery 📸</h2>
+            <p style="text-align:center; color:#333; margin-bottom:30px;">A glimpse of my life ></p>
+
+            <h3 class="text-highlight" style="margin-bottom: 20px;">SPORTS 🏆</h3>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="karisma 24/WhatsApp Image 2025-12-03 at 14.24.30_5774077f.jpg" alt="SPORTS"></div>
+                <div class="gallery-item"><img src="karisma 24/WhatsApp Image 2025-12-03 at 14.24.33_b177dce3.jpg" alt="SPORTS"></div>
+                <div class="gallery-item"><img src="karisma 24/WhatsApp Image 2025-12-03 at 14.24.32_6acea9a2.jpg" alt="SPORTS"></div>
+                <div class="gallery-item"><img src="karisma 24/WhatsApp Image 2025-12-03 at 14.23.17_c46c389d.jpg" alt="SPORTS"></div>
+                <div class="gallery-item"><img src="karisma 24/15.jpg" alt="SPORTS"></div>
+                <div class="gallery-item"><img src="karisma 24/1.jpg" alt="SPORTS"></div>
+                <div class="gallery-item"><img src="karisma 24/4.jpg" alt="sport"></div>
+                <div class="gallery-item"><img src="karisma 24/5.jpg" alt="sport"></div>
+                <div class="gallery-item"><img src="karisma 24/16.jpg" alt="sport"></div>
+                <div class="gallery-item"><img src="karisma 24/mssd 2.jpg" alt="sport"></div>
+                <div class="gallery-item"><img src="karisma 24/mssd.jpg" alt="sport"></div>
+                <div class="gallery-item">
+                    <video controls muted autoplay loop>
+                        <source src="karisma 24/karishit .mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+
+            <h3 class="text-highlight" style="margin-bottom: 20px;">EDUCATIONS 👨🏻‍🎓</h3>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="EDUCATION/4.jpg" alt="EDUCATIONS"></div>
+                <div class="gallery-item"><img src="EDUCATION/2.jpg" alt="EDUCATIONS"></div>
+                <div class="gallery-item"><img src="EDUCATION/3.jpg" alt="EDUCATIONS"></div>
+                <div class="gallery-item"><img src="EDUCATION/photo nigg'.jpg" alt = "EDUCATIONS"></div>
+                <div class="gallery-item"><img src="EDUCATION/sem 2 .jpg" alt = "EDUCATIONS"></div>
+                <div class="gallery-item"><img src="EDUCATION/smk ust.jpg" alt="EDUCATIONS"></div>
+                <div class="gallery-item"><img src="EDUCATION/smk 1.jpg" alt="EDUCATIONS"></div>
+            </div>
+
+            <h3 class="text-highlight" style="margin-bottom: 20px;">INTERNSHIP 💼</h3>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="intershiii/1.jpg" alt="INTERNSHIP"></div>
+                <div class="gallery-item"><img src="intershiii/4.jpg" alt="INTERNSHIP"></div>
+                <div class="gallery-item"><img src="intershiii/3.jpg" alt="INTERNSHIP"></div>
+                <div class="gallery-item"><img src="intershiii/2.jpg" alt="INTERNSHIP"></div>
+                <div class="gallery-item"><img src="intershiii/5.jpg" alt="INTERNSHIP"></div>
+                <div class="gallery-item"><img src="intershiii/7.jpg" alt="INTERNSHIP"></div>
+                <div class="gallery-item"><img src="intershiii/6.jpg" alt="INTERNSHIP"></div>
+                
+                <div class="gallery-item">
+                    <video controls muted autoplay loop>
+                        <source src="intershiii/9.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+            
+
+            <h3 class="text-highlight" style="margin-bottom: 20px;">PERSONAL LIFE 😎</h3>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="personal experiences/1.jpg" alt = "PERSONAL LIFE"></div>
+                <div class="gallery-item"><img src="personal experiences/3.jpg" alt="PERSONAL LIFE"></div>
+                <div class="gallery-item"><img src="personal experiences/5.jpg" alt="PERSONAL LIFE"></div>
+                <div class="gallery-item"><img src="personal experiences/4.jpg" alt="PERSONAL LIFE"></div>
+                <div class="gallery-item"><img src="personal experiences/fut 66.jpg" alt = "PERSONAL LIFE"></div>
+                
+                
+                <div class="gallery-item">
+                    <video controls muted autoplay loop>
+                        <source src="personal experiences/10.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+
+            <div style="text-align: right; margin-top: 20px;">
+                <a href="#top" class="back-btn">Back to Top ↑</a>
+            </div>
+        </div>
+
+        <div id="family" class="tab-content">
+            <h2>My Family 👨‍👩‍👧‍👦</h2>
+            <p style="text-align:center; color:#333; margin-bottom:30px;">The people who shaped who I am.</p>
+
+            <div class="family-container family-top">
+                <div class="family-member">
+                    <img src="personal experiences/ayah.jpg" alt="Father">
+                    <p>Fairul Khairi bin Ab Lazak (God-Father)</p>
+                </div>
+                <div class="family-member">
+                    <img src="personal experiences/ibu.jpg" alt = "Mother">
+                    <p>Deasymardiany binti Masrul (God-Mother)</p>
+                </div>
+            </div>
+            
+            <h3 class="text-highlight" style="font-size: 20px; margin-bottom: 20px; text-align: center;">Siblings</h3>
+            <div class="family-container family-bottom">
+                <div class="family-member" style="width: 200px; padding: 20px;">
+                    <img src="personal experiences/me.jpg" alt="Fahmy (Brother)">
+                    <p>Fahmy Izzuddin bin Fairul Khairi (Brother)</p>
+                </div>
+                <div class="family-member" style="width: 200px; padding: 20px;">
+                    <img src="personal experiences/11.jpg" alt="Fatin (Sister)">
+                    <p>Fatin Irdina bin Fairul Khairi (Sister)</p>
+                </div>
+                <div class="family-member" style="width: 200px; padding: 20px;">
+                    <img src="personal experiences/33.jpg" alt="Farysha (Youngest Sibling)">
+                    <p>Farysha Izzati bin Fairul Khairi (Youngest Sibling)</p>
+                </div>
+            </div>
+
+            <div style="text-align: right; margin-top: 40px;">
+                <a href="#top" class="back-btn">Back to Top ↑</a>
+            </div>
+
+        </div> 
+        
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- CLOCK FUNCTIONALITY (CLEANED) ---
+            const days = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
+
+            function pad(n){ return n.toString().padStart(2,'0'); }
+
+            function updateClock(){
+                const now = new Date();
+                const dd = pad(now.getDate());
+                const mm = pad(now.getMonth()+1);
+                const yy = (""+now.getFullYear()).slice(-2);
+                const day = days[now.getDay()];
+                const hh = pad(now.getHours());
+                const min = pad(now.getMinutes());
+                const ss = pad(now.getSeconds());
+
+                const text = `${dd}/${mm}/${yy} (${day}) — ${hh}:${min}:${ss}`;
+                
+                // Update all elements with the class 'live-clock-output'
+                document.querySelectorAll(".live-clock-output").forEach(el => {
+                    el.textContent = text;
+                });
+            }
+
+            updateClock();
+            setInterval(updateClock,1000);
+
+            // ----------------------------------------------------
+            // FIXED: MAIN TAB SWITCHING WITH LOADER (FASTER TRANSITION)
+            // ----------------------------------------------------
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.tab-content');
+            const loader = document.getElementById('page-loader');
+
+            // Hide the loader initially
+            loader.classList.remove('visible'); 
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const targetId = tab.dataset.tab;
+                    const targetContent = document.getElementById(targetId);
+
+                    // 1. Show the loader immediately
+                    loader.classList.add('visible');
+
+                    // 2. Use minimal delay (100ms) to allow the visual transition to begin before content is swapped
+                    setTimeout(() => {
+                        // A. Remove 'active' from all main tabs and contents
+                        tabs.forEach(t => t.classList.remove('active'));
+                        contents.forEach(c => c.classList.remove('active'));
+                        
+                        // B. Add 'active' to the clicked tab and its corresponding content
+                        tab.classList.add('active');
+                        targetContent.classList.add('active');
+
+                        // C. Hide the loader 
+                        loader.classList.remove('visible');
+
+                    }, 100); // Reduced from 500ms for snappier feel
+                });
+            });
+
+
+            // --- EXPERIENCE DASHBOARD (NESTED TABS) TOGGLE FUNCTIONALITY (CLEANED) ---
+            const categoryCards = document.querySelectorAll('.exp-category-card');
+            
+            function toggleExperience(targetId, clickedCard) {
+                const targetContent = document.getElementById(targetId);
+                
+                // Find the currently active card and content within the experience dashboard
+                let activeCard = document.querySelector('.exp-category-card.active');
+                let activeContent = document.querySelector('.experience-details.active');
+
+
+                // CASE 1: The clicked card is already active (Toggling OFF)
+                if (clickedCard.classList.contains('active')) {
+                    clickedCard.classList.remove('active');
+                    targetContent.classList.remove('active');
+                } 
+                // CASE 2: The clicked card is different or none is active (Toggling ON / Switching)
+                else {
+                    // Deactivate the currently active content and card, if any
+                    if (activeCard) {
+                        activeCard.classList.remove('active');
+                    }
+                    if (activeContent) {
+                        activeContent.classList.remove('active');
+                    }
+
+                    // Activate the new content and card
+                    clickedCard.classList.add('active');
+                    targetContent.classList.add('active');
+                }
+            }
+
+            // Add click listeners to all category cards
+            categoryCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const targetId = card.getAttribute('data-exp-target');
+                    toggleExperience(targetId, card);
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
