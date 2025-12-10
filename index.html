@@ -12,32 +12,33 @@
     
     
     <style>
+/* THEME PALETTE:
+    Primary Color (Green Sea): #2C3E50 (Dark Blue/Gray)
+    Accent Color (Concrete): #95A5A6 (Light Gray/Concrete)
+*/
+:root {
+    --primary-color: #2C3E50; /* Green Sea - Dark Accent */
+    --accent-color: #95A5A6; /* Concrete - Light Accent/Highlight */
+    --link-color: #95A5A6;
+    --border-color: #2C3E50;
+    --hover-bg: #2C3E50;
+    --hover-text: #ffffff;
+    --table-stripe: #ecf0f1; /* Lighter shade of concrete for stripes */
+}
+
 /* Global Reset and Utilities */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-a { text-decoration: none; color: var(--accent-light); transition: color 0.3s ease; }
-a:hover { color: var(--text-light); }
+a { text-decoration: none; color: var(--link-color); transition: color 0.3s ease; }
+a:hover { color: var(--hover-text); }
 
-/* --- New Color Variables --- */
-/* THEME PALETTE: Green Sea (#2C3E50) and Concrete (#95A5A6) */
-:root {
-    --primary-dark: #2C3E50; /* Green Sea - Dark Background */
-    --accent-light: #95A5A6; /* Concrete - Light Accent/Highlight */
-    --container-bg: #22303c; /* Darker than primary for the main box */
-    --text-light: #ffffff;
-    --text-dim: #cccccc;
-    --border-color: #95A5A6;
-    --hover-bg: #405973; 
-}
-
-
-/* --- 🦇 Background & Layout (DARK THEME) --- */
+/* --- 🦇 Background & Layout --- */
 body {
-    background-color: var(--primary-dark);
+    background-color: var(--primary-color); /* Changed from red */
     font-size: 50px;
     font-family: 'Poppins', Arial, sans-serif;
-    color: var(--text-light);
-    background-image: url("bakcgrou.jpeg"); /* Original path preserved */
+    color: white;
+    background-image: url("backgroiubnd.jpg"); /* Original path preserved */
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -53,19 +54,24 @@ body {
 /* 🧱 Main Container */
 .container {
     max-width: 1100px;
-    background: var(--container-bg); 
-    color: var(--text-light);
+    background: rgba(255, 255, 255, 0.95);
+    color: #000;
     border-radius: 40px;
-    border: 6px solid var(--accent-light); 
-    box-shadow: 0 10px 50px rgba(0,0,0,0.8);
+    border: 6px solid var(--primary-color); /* Changed from red */
+    box-shadow: 0 10px 35px rgba(0,0,0,0.5);
     overflow: hidden;
     margin: 20px;
     position: relative;
 }
 
-/* 🚀 Loading Screen Styles */
+/* 🚀 Loading Screen Styles (Used for tab switching transition) */
 #page-loader {
-    background-color: rgba(44, 62, 80, 0.95); /* Darkened for theme */
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
     z-index: 100;
     display: flex;
     justify-content: center;
@@ -75,124 +81,134 @@ body {
     transition: opacity 0.1s ease;
 }
 
+#page-loader.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
 .loader-spinner {
+    width: 70px;
+    height: 70px;
     border: 8px solid #f3f3f3; 
-    border-top: 8px solid var(--accent-light); /* Concrete */
+    border-top: 8px solid var(--primary-color); /* Changed from red */
+    border-radius: 50%;
+    animation: spin 10s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .loader-text {
-    color: var(--accent-light); /* Concrete */
+    position: absolute;
+    margin-top: 100px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--primary-color); /* Changed from red */
+    opacity: 0.9;
 }
 
 /* --- Header & Clock --- */
 .live-clock-output {
     font-size: 16px; 
     font-weight: bold; 
-    background: rgba(149, 165, 166, 0.1); /* Concrete Transparent */
+    background: rgba(44, 62, 80, 0.1); /* Use primary color with opacity */
     padding: 8px 14px;
     border-radius: 10px;
-    color: var(--accent-light); /* Concrete */
+    color: var(--primary-color); /* Changed from red */
     text-align: center;
     width: fit-content;
     margin-left: auto;
 }
 
+
 header {
-    background: var(--primary-dark);
-    color: var(--text-light);
-    text-align: left; /* Aligned left like the design image */
-    padding: 60px 80px; 
-    border-bottom: 6px solid var(--accent-light);
-    height: 450px; 
-    position: relative;
-    overflow: hidden;
+    background: linear-gradient(135deg, #ffffff, var(--primary-color)); /* Changed red to primary */
+    color: #000000;
+    text-align: center;
+    padding: 60px 40px;
+    border-bottom: 6px solid var(--primary-color); /* Changed from red */
 }
+header h1 { font-size: 38px; margin-bottom: 5px; letter-spacing: 2px; font-family: 'Bebas Neue', sans-serif;}
+header h2 { font-size: 26px; margin-bottom: 10px; font-family: 'Bebas Neue', sans-serif; color: #fff;}
+header p { font-size: 16px; opacity: 0.9; }
 
-/* New Design Element for Header (The "Statue" effect) */
-.header-design-element {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 60%;
-    height: 100%;
-    background: url("fahmeh PFP.jpg") no-repeat center right; 
-    background-size: cover; 
-    opacity: 0.8; 
-    mix-blend-mode: screen; 
-    transform: translateX(100px) scale(1.1); 
-    filter: grayscale(100%) brightness(120%) contrast(150%) hue-rotate(300deg); 
-}
-
-header h1 { 
-    font-size: 60px; 
-    margin-bottom: 5px; 
-    letter-spacing: 4px; 
-    font-family: 'Bebas Neue', sans-serif;
-    color: var(--accent-light); /* Concrete for the main title */
-    position: relative;
-    z-index: 2;
-}
-header h2 { 
-    font-size: 26px; 
-    margin-bottom: 10px; 
-    font-family: 'Bebas Neue', sans-serif; 
-    color: var(--text-dim);
-    position: relative;
-    z-index: 2;
-}
-header p { 
-    font-size: 16px; 
-    opacity: 0.8; 
-    color: var(--text-dim);
-    position: relative;
-    z-index: 2;
-    max-width: 400px; 
-    line-height: 1.6;
-}
-
-
-/* --- Tabs (DARK THEME) --- */
+/* --- Tabs --- */
 .tabs {
     display: flex;
     flex-wrap: wrap;
-    background: var(--primary-dark);
-    border-bottom: 4px solid var(--accent-light);
+    background: #fff;
+    border-bottom: 4px solid var(--primary-color); /* Changed from red */
 }
 .tab {
-    color: var(--accent-light);
-    border-right: 1px solid var(--hover-bg);
+    flex: 1;
+    text-align: center;
+    padding: 18px 0;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--primary-color); /* Changed from red */
+    transition: all 0.3s ease;
+    border-right: 1px solid var(--accent-color); /* Light border */
 }
 .tab:last-child { border-right: none; }
-.tab:hover { background: var(--hover-bg); color: var(--text-light); }
+.tab:hover { background: var(--hover-bg); color: var(--hover-text); } /* Dark background on hover */
 .tab.active { 
-    background: var(--accent-light); 
-    color: var(--primary-dark); 
+    background: var(--primary-color); /* Changed from red */
+    color: #fff; 
 }
 
 /* --- Content & Headings --- */
 .tab-content {
-    color: var(--text-dim); /* Darkened regular text */
+    display: none;
+    padding: 40px 50px;
+    animation: fadeIn 0.4s ease-in-out;
+    text-align: left;
+    line-height: 1.7;
+    font-size: 16px;
 }
+.tab-content.active { display: block; }
 
 h2 {
-    color: var(--accent-light);
-    border-bottom: 2px solid var(--accent-light);
+    color: var(--primary-color); /* Changed from red */
+    margin-bottom: 20px;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid var(--primary-color); /* Changed from red */
+    padding-bottom: 8px;
 }
 .text-highlight {
-    color: var(--accent-light);
+    color: var(--primary-color); /* Changed from red */
 }
 
 /* --- Overview Specific Styles --- */
 .profile-layout {
     display: flex; 
-    align-items: center; /* Centered now that the image is gone */
+    align-items: flex-start; 
     gap: 30px; 
     margin-bottom: 25px; 
     flex-wrap: wrap;
 }
-
-/* Profile Pic styles removed as it's now in the header */
-
+.profile-pic-container {
+    flex: 1; 
+    text-align: center;
+    min-width: 250px;
+}
+.profile-pic-img {
+    width: 280px; 
+    height: 380px; 
+    border-radius: 10px; 
+    border: 5px solid var(--primary-color); /* Changed from red */
+    box-shadow: 0 5px 15px rgba(44, 62, 80, 0.4); /* Shadow color updated */
+    object-fit: cover;
+    transition: all 0.4s ease-in-out;
+}
+.profile-pic-img:hover {
+    transform: scale(1.03); 
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 15px var(--primary-color); /* Shadow color updated */
+}
 .profile-desc {
     flex: 2; 
     text-align: justify;
@@ -201,152 +217,351 @@ h2 {
     font-size: 16px; 
     line-height: 1.8; 
     margin-bottom: 25px;
-    color: var(--text-dim); /* Darkened regular text */
+    color: #333;
 }
 
 /* Biodata Card */
 .biodata-card {
-    background:var(--container-bg); 
-    border:5px solid var(--accent-light); 
-    box-shadow:0 6px 25px rgba(0,0,0,0.5); 
+    background:#fff; 
+    border-radius:20px; 
+    border:5px solid var(--primary-color); /* Changed from red */
+    box-shadow:0 6px 25px rgba(0,0,0,0.25); 
+    padding:25px; 
+    margin-top:25px;
+    transition: all 0.4s ease;
 }
 .biodata-card:hover {
-    box-shadow: 0 10px 30px rgba(149, 165, 166, 0.4); 
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 30px rgba(44, 62, 80, 0.4); /* Shadow color updated */
 }
 .biodata-card h3 {
-    color:var(--accent-light); 
+    color:var(--primary-color); /* Changed from red */
+    margin-bottom:15px; 
+    font-size:20px; 
+    text-transform:uppercase;
 }
 
 /* Table Styling */
 table {
-    border: 3px solid var(--accent-light);
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 15px;
+    font-size: 15px;
+    border: 3px solid var(--primary-color); /* Changed from red */
+    border-radius: 12px;
+    overflow: hidden;
+    text-align: left;
 }
 th, td {
-    border: 1px solid var(--accent-light);
+    border: 1px solid var(--primary-color); /* Changed from red */
+    padding: 10px 14px;
+    text-align: left;
 }
 th { 
-    background-color: var(--accent-light); 
-    color: var(--primary-dark);
+    background-color: var(--primary-color); /* Changed from red */
+    color: #fff;
+    font-weight: bold; 
+    font-size: 16px; 
 }
 .table-row-odd { 
-    background-color: var(--container-bg); 
-    color: var(--text-light);
+    background-color: #fff; 
+    transition: background-color 0.3s ease;
 }
 .table-row-even { 
-    background-color: #384c61; /* Slightly lighter shade for stripes */
-    color: var(--text-light);
+    background-color: var(--table-stripe); /* Light gray for even rows */
+    transition: background-color 0.3s ease;
 }
 .table-row-odd:hover, .table-row-even:hover {
-    background-color: var(--hover-bg); 
+    background-color: var(--accent-color); /* Concrete on hover */
+    cursor: default;
 }
 
 /* Spotify Player */
 .spotify-player {
-    border: 3px solid var(--accent-light);
+    border-radius:5px; 
+    margin-top:5px; 
+    box-shadow:0 5px 15px rgba(0,0,0,0.4);
+    border: 3px solid var(--primary-color); /* Changed from red */
+    transition: all 0.4s ease;
 }
 .spotify-player:hover {
-    box-shadow: 0 8px 20px rgba(149, 165, 166, 0.4);
+    transform: scale(1.01);
+    box-shadow: 0 8px 20px rgba(44, 62, 80, 0.4); /* Shadow color updated */
 }
 
 /* --- EDUCATION Specific Styles --- */
 .education-card {
-    background:var(--container-bg); 
-    border-left:8px solid var(--accent-light); 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    gap: 30px; 
+    flex-wrap: wrap; 
+    background:#fff; 
+    border-left:8px solid var(--primary-color); /* Changed from red */
+    border-radius:15px; 
+    padding:25px; 
+    box-shadow:0 5px 20px rgba(0,0,0,0.15);
+    transition: all 0.4s ease-in-out;
 }
+.education-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2), 0 0 10px rgba(44, 62, 80, 0.4); /* Shadow color updated */
+}
+
+.education-card-content {
+    flex: 1;
+}
+
 .education-card-img, .education-card-iframe {
-    border: 3px solid var(--accent-light); 
+    width: 300px;
+    min-width: 250px;
+    height: 200px;
+    border-radius: 12px; 
+    border: 3px solid var(--primary-color); /* Changed from red */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    object-fit: cover;
 }
 
 /* --- EXPERIENCE DASHBOARD STYLES --- */
 .experience-dashboard {
-    /* ... existing code ... */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px; 
+    justify-content: center;
+    margin-bottom: 40px;
 }
 
 .exp-category-card {
-    /* ... existing code ... */
+    flex: 1 1 280px; 
+    color: #fff;
+    padding: 30px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    border: 3px solid transparent; 
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-#work-card { background: linear-gradient(135deg, var(--primary-dark), #5e7992); }
-#volunteer-card { background: linear-gradient(135deg, #5e7992, var(--primary-dark)); }
-#sports-card { background: linear-gradient(135deg, var(--primary-dark), #5e7992); }
+/* Backgrounds updated to Primary/Darker shades */
+#work-card { background: linear-gradient(135deg, #2C3E50, #1c2a38); } 
+#volunteer-card { background: linear-gradient(135deg, #95A5A6, #7f8c8d); } /* Use concrete for lighter card */
+#sports-card { background: linear-gradient(135deg, #2C3E50, #1c2a38); }
 
 .exp-category-card:hover {
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), 0 0 40px rgba(149, 165, 166, 0.7); 
+    transform: translateY(-10px); 
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), 0 0 40px rgba(149, 165, 166, 0.7); /* Shadow color updated to concrete */
     border-color: #ffffff; 
 }
 
 .exp-category-card.active {
     border: 3px solid #ffffff;
-    background: #000000 !important; 
-    box-shadow: 0 0 20px rgba(149, 165, 166, 1);
+    background: #1c2a38 !important; /* Darker primary for active */
+    box-shadow: 0 0 20px rgba(149, 165, 166, 1); /* Shadow color updated to concrete */
     transform: scale(1.05); 
 }
 
-/* Experience Details Cards - Dark Theme */
+/* Experience Details Cards */
+.experience-details-container {
+    padding: 20px 0;
+}
+.experience-details {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+.experience-details.active {
+    display: block; 
+}
+
 .card {
-    background-color: var(--primary-dark); 
-    color: var(--text-dim);
+    background-color: #f7f7f7; 
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 30px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease-in-out;
 }
+
 .experience-details .card:hover {
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4), 0 0 15px rgba(149, 165, 166, 0.7); 
+    transform: translateY(-4px); 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2), 0 0 15px rgba(44, 62, 80, 0.7); /* Shadow color updated */
 }
+
 .detail-card-image {
-    border: 3px solid var(--accent-light);
+    width: 80%; 
+    max-width: 600px;
+    border-radius: 15px;
+    border: 3px solid var(--primary-color); /* Changed from red */
+    box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+    object-fit: cover;
+    height: auto; 
+    display: block; 
+    margin: 15px auto 0; 
 }
 
 
 /* --- GALLERY & MEDIA --- */
-.gallery-item {
-    border: 5px solid var(--accent-light);
-}
-.gallery-item:hover {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 10px rgba(149, 165, 166, 0.6); 
-    border-color: var(--primary-dark); 
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 16px;
+    margin-bottom: 30px;
 }
 
-/* --- FAMILY SECTION STYLES (MODIFIED FOR LARGER IMAGES) --- */
+.gallery-item {
+    border-radius: 12px;
+    border: 5px solid var(--primary-color); /* Changed from red */
+    overflow: hidden; 
+    transition: all 0.4s ease-in-out;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-item img,
+.gallery-item video {
+    width: 100%;
+    height: auto; 
+    display: block; 
+    transition: all 0.4s ease-in-out;
+}
+
+.gallery-item video {
+    min-height: 200px;
+}
+
+.gallery-item:hover {
+    transform: scale(1.03); 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 10px rgba(44, 62, 80, 0.6); /* Shadow color updated */
+    border-color: #000000; 
+    z-index: 10; 
+}
+.gallery-item:hover img,
+.gallery-item:hover video {
+    transform: scale(1.02) rotate(0.5deg); 
+}
+
+/* --- FAMILY SECTION STYLES --- */
+.family-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+.family-top {
+    margin-bottom: 50px;
+    gap: 80px; 
+}
+
 .family-member {
-    background: rgba(64, 89, 115, 0.9); /* Dark background */
-    border: 4px solid var(--accent-light);
-    color: var(--text-light); 
+    text-align: center;
+    background: rgba(250, 250, 250, 0.9); 
+    border: 4px solid var(--primary-color); /* Changed from red */
+    border-radius: 18px; 
+    padding: 25px;
+    width: 260px;
+    color: #fff; 
+    box-shadow: 0 8px 15px rgba(0,0,0,0.4);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); 
+    cursor: pointer;
 }
 .family-member:hover {
-    box-shadow: 0 20px 45px rgba(149, 165, 166, 0.6);
+    transform: scale(1.05) translateY(-7px); 
+    box-shadow: 0 20px 45px rgba(44, 62, 80, 0.6); /* Shadow color updated */
     border-color: #ffffff;
 }
 
+/* ---> PARENTS IMAGE SIZE <--- */
 .family-member img {
-    border: 5px solid var(--primary-dark);
+    width: 180px; 
+    height: 180px; 
+    border-radius: 50%;
+    border: 5px solid #fff;
+    margin-bottom: 15px;
+    object-fit: cover; 
+    transition: all 0.5s ease-in-out;
+}
+
+/* ---> SIBLINGS IMAGE SIZE <--- */
+.family-container.family-bottom .family-member img {
+    width: 150px; 
+    height: 150px;
 }
 
 .family-member:hover img {
-    border-color: var(--accent-light);
+    transform: scale(1.03);
+    border-color: var(--primary-color); /* Changed from red */
 }
 .family-member p {
-    color: var(--accent-light);
+    font-size: 16px; 
+    font-weight: 700;
+    margin-top: 5px;
+    color: var(--primary-color); /* Changed from red */
+    letter-spacing: 1px;
 }
 
 /* Social Media Icon Styles */
-/* ... existing code ... */
+.social-icons {
+    text-align: center; 
+    margin-top: 15px;
+}
+
+.fa {
+    padding: 15px;      
+    font-size: 24px;    
+    width: 50px;       
+    text-align: center; 
+    text-decoration: none; 
+    margin: 0 5px;      
+    border-radius: 50%; 
+    color: white;       
+    display: inline-block;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.fa:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
+}
+
+.fa-instagram {
+    /* Kept original gradient as it is standard for Instagram, changing base color might break recognition */
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+}
+
+.fa-whatsapp {
+    background-color: #25d366; /* Kept standard WhatsApp color */
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
 /* --- 📱 RESPONSIVENESS (Media Queries) --- */
+@media (max-width: 1024px) {
+    .container {
+        max-width: 95%; 
+    }
+}
+
 @media (max-width:820px) {
     /* Clocks now centered */
     .live-clock-output {
         margin: 10px auto;
     }
-    header { height: auto; text-align: center; padding: 40px 25px; }
-    .header-design-element { display: none; } /* Hide the dramatic background on small screens */
-
     header h1 { font-size: 30px; }
     header h2 { font-size: 22px; }
     .tab-content { padding: 25px; }
     
     /* Profile layout stacks */
     .profile-layout { flex-direction: column; }
-    .profile-desc { text-align: justify !important; }
-    
+    .profile-desc { text-align: center !important; }
+    .profile-pic-container { min-width: 100%; }
+    .profile-pic-img { margin: 0 auto; } 
+
     /* Education cards stack */
     .education-card {
         flex-direction: column;
@@ -356,9 +571,17 @@ th {
     }
 
     /* Family cards stack */
+    .family-container {
+        gap: 30px;
+    }
     .family-member {
         width: 100%;
         max-width: 300px;
+    }
+    .family-top {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
     }
 }
     </style>
@@ -377,8 +600,6 @@ th {
     <div class="container" id="top">
         
         <header>
-            <div class="header-design-element"></div> 
-            
             <h2>The Wonderfully Weird World of..</h2>
             <h1>Fahmy Izzuddin Bin Fairul Khairi</h1>
             <p>Information Management Student | Science Information</p>
@@ -403,8 +624,15 @@ th {
 
             <div class="profile-layout">
                 
-                <div class="profile-desc" style="flex: 3; max-width: 100%;"> 
-                    <p class="description-text" style="color: var(--text-dim);">
+                <div class="profile-pic-container">
+                    <img 
+                        src="fahmeh PFP.jpg"
+                        alt="Fahmy Izzuddin Profile Picture" 
+                        class="profile-pic-img">
+                </div>
+
+                <div class="profile-desc">
+                    <p class="description-text">
                         <strong class="text-highlight">Driven by a deep sense of gratitude</strong> for every opportunity. 📜 My personal philosophy is simple:
                             <strong class="text-highlight">Always be grateful for what I get and to gracefully let go if things didn't go on my way.</strong> This principle fuels my primary goal: to
                             <strong class="text-highlight">become the best version of myself in every capacity.</strong> 🏅 My purpose extends beyond personal achievement; I strive to make all people around me proud through integrity and commitment.
@@ -464,14 +692,8 @@ th {
                 </table>
             </div>
 
-            <h3 class="text-highlight" style="font-size: 20px; margin-bottom: 15px; margin-top: 60px; text-align: center;">"Masterpieces" glazer</h3> 
-            <iframe 
-                class="spotify-player"
-                src="https://open.spotify.com/embed/track/2RGddw20sWH7py7RZmqNo4?utm_source=generator"
-                width="100%" height="200" frameborder="0" allowfullscreen=""
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                loading="lazy">
-            </iframe>
+            <h3 class="text-highlight" style="font-size: 20px; margin-bottom: 15px; margin-top: 60px; text-align: center;"> 👏"Masterpieces" glazer 👏</h3> 
+            <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6BQynL5lCDgv2cYLZ4cuOu?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             <div style="margin-top: 50px; text-align: right;">
                 <a href="#top" class="back-btn">Back to Top ↑</a>
             </div>
@@ -479,7 +701,7 @@ th {
 
         <div id="education" class="tab-content">
             <h2>Education Journey</h2>
-            <p style="text-align:center; color:var(--text-dim); margin-bottom:25px;"></p>
+            <p style="text-align:center; color:#333; margin-bottom:25px;"></p>
 
             <div style="display: flex; flex-direction: column; gap: 50px;">
 
@@ -561,7 +783,7 @@ th {
 
         <div id="experience" class="tab-content">
             <h2>Experience Dashboard</h2>
-            <p style="text-align:center; color:var(--text-dim); margin-bottom:25px;">
+            <p style="text-align:center; color:#333; margin-bottom:25px;">
                 Just click on it 👆
             </p>
 
@@ -648,7 +870,7 @@ th {
                             <li>Built teamwork and leadership through competitive sports.</li>
                         </ul>
                         <div style="text-align:center;">
-                            <img src="karisma 24/team.jpg" alt="KARISMA 2024 Team" class="detail-card-image">
+                            <img src="karisma 24/karisma 6.jpg" alt="KARISMA 2024 Team" class="detail-card-image">
                         </div>
                     </div>
 
@@ -662,7 +884,7 @@ th {
                             <li>Accepting my fate and socialize with my teammates.</li>
                         </ul>
                         <div style="text-align:center;">
-                            <img src="karisma 24/WhatsApp Image 2025-12-03 at 10.13.23_79d9a667.jpg" alt="Handball Tournament 2025" class="detail-card-image">
+                            <img src="karisma 24/varcity 1.jpg" alt="Handball Tournament 2025" class="detail-card-image">
                         </div>
                     </div>
                 </div>
@@ -675,14 +897,14 @@ th {
 
         <div id="gallery" class="tab-content">
             <h2>Gallery 📸</h2>
-            <p style="text-align:center; color:var(--text-dim); margin-bottom:30px;">A glimpse of my life ></p>
+            <p style="text-align:center; color:#333; margin-bottom:30px;">A glimpse of my life ></p>
 
             <h3 class="text-highlight" style="margin-bottom: 20px;">SPORTS 🏆</h3>
             <div class="gallery-grid">
-                <div class="gallery-item"><img src="karisma 24/WhatsApp Image 2025-12-03 at 14.24.30_5774077f.jpg" alt="SPORTS"></div>
-                <div class="gallery-item"><img src="karisma 24/WhatsApp Image 2025-12-03 at 14.24.33_b177dce3.jpg" alt="SPORTS"></div>
-                <div class="gallery-item"><img src="karisma 24/WhatsApp Image 2025-12-03 at 14.24.32_6acea9a2.jpg" alt="SPORTS"></div>
-                <div class="gallery-item"><img src="karisma 24/WhatsApp Image 2025-12-03 at 14.23.17_c46c389d.jpg" alt="SPORTS"></div>
+                <div class="gallery-item"><img src="karisma 24/karisma 1.jpg" alt="SPORTS"></div>
+                <div class="gallery-item"><img src="karisma 24/karisma 2.jpg" alt="SPORTS"></div>
+                <div class="gallery-item"><img src="karisma 24/karisma 3.jpg" alt="SPORTS"></div>
+                <div class="gallery-item"><img src="karisma 24/karisma 4.jpg" alt="SPORTS"></div>
                 <div class="gallery-item"><img src="karisma 24/15.jpg" alt="SPORTS"></div>
                 <div class="gallery-item"><img src="karisma 24/1.jpg" alt="SPORTS"></div>
                 <div class="gallery-item"><img src="karisma 24/4.jpg" alt="sport"></div>
@@ -692,7 +914,7 @@ th {
                 <div class="gallery-item"><img src="karisma 24/mssd.jpg" alt="sport"></div>
                 <div class="gallery-item">
                     <video controls muted autoplay loop>
-                        <source src="karisma 24/karishit .mp4" type="video/mp4">
+                        <source src="karisma 24/karisma 8.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
@@ -752,7 +974,7 @@ th {
 
         <div id="family" class="tab-content">
             <h2>My Family 👨‍👩‍👧‍👦</h2>
-            <p style="text-align:center; color:var(--text-dim); margin-bottom:30px;">The people who shaped who I am.</p>
+            <p style="text-align:center; color:#333; margin-bottom:30px;">The people who shaped who I am.</p>
 
             <div class="family-container family-top">
                 <div class="family-member">
@@ -898,3 +1120,7 @@ th {
     </script>
 </body>
 </html>
+
+
+
+
