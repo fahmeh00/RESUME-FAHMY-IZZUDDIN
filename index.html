@@ -141,30 +141,66 @@ header h1 { font-size: 38px; margin-bottom: 5px; letter-spacing: 2px; font-famil
 header h2 { font-size: 26px; margin-bottom: 10px; font-family: 'Bebas Neue', sans-serif; color: #fff;}
 header p { font-size: 16px; opacity: 0.9; }
 
-/* --- Tabs --- */
-.tabs {
+/* --- Tabs (Hidden) --- */
+.tabs { display: none; } 
+
+/* ⚓ FLOATING TABS DOCK (HOLO EFFECT) - MOVED TO TOP */
+.floating-tabs-dock {
+    /* New Positioning: Centered, pulled up toward the header */
     display: flex;
-    flex-wrap: wrap;
-    background: #fff;
-    border-bottom: 4px solid var(--primary-color); /* Changed from red */
+    justify-content: center; 
+    margin: -30px auto 30px auto; /* Negative margin pulls it up over the header's border and adds space below */
+    width: fit-content;
+    max-width: 90%;
+    
+    background: rgba(0, 0, 0, 0.6); 
+    border-radius: 15px;
+    padding: 10px;
+    
+    /* Holo Glow + Deep Shadow */
+    box-shadow: 0 0 30px rgba(44, 62, 80, 0.5), 0 5px 25px rgba(0, 0, 0, 0.6); 
+    backdrop-filter: blur(12px); 
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+    z-index: 50;
+    
+    /* Added Effect: Subtle 3D lift on hover for the entire dock */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
 }
-.tab {
-    flex: 1;
-    text-align: center;
-    padding: 18px 0;
+.floating-tabs-dock:hover {
+    box-shadow: 0 0 40px rgba(44, 62, 80, 0.7), 0 10px 30px rgba(0, 0, 0, 0.8);
+    transform: translateY(-2px); /* Lift the whole bar slightly */
+}
+
+.dock-tab {
     cursor: pointer;
-    font-weight: 700;
-    font-size: 16px;
-    color: var(--primary-color); /* Changed from red */
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 8px 15px;
+    margin: 0 3px;
+    border-radius: 10px;
     transition: all 0.3s ease;
-    border-right: 1px solid var(--accent-color); /* Light border */
+    text-transform: uppercase;
+    position: relative; 
 }
-.tab:last-child { border-right: none; }
-.tab:hover { background: var(--hover-bg); color: var(--hover-text); } /* Dark background on hover */
-.tab.active { 
-    background: var(--primary-color); /* Changed from red */
-    color: #fff; 
+.dock-tab:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
 }
+.dock-tab.active {
+    background: var(--primary-color); 
+    color: #ffffff;
+    /* Holo glow for active state */
+    box-shadow: 0 0 15px rgba(44, 62, 80, 0.8); 
+    transform: translateY(-3px); /* Added subtle lift to active tab */
+    animation: activePulse 1.5s infinite alternate; /* New pulse effect */
+}
+/* New Keyframe Animation for Active Tab */
+@keyframes activePulse {
+    from { box-shadow: 0 0 15px rgba(44, 62, 80, 0.8); }
+    to { box-shadow: 0 0 25px rgba(44, 62, 80, 1.2); }
+}
+
 
 /* --- Content & Headings --- */
 .tab-content {
@@ -207,14 +243,14 @@ h2 {
     width: 280px; 
     height: 380px; 
     border-radius: 10px; 
-    border: 5px solid var(--primary-color); /* Changed from red */
-    box-shadow: 0 5px 15px rgba(44, 62, 80, 0.4); /* Shadow color updated */
+    border: none; /* MODIFIED: Removed border as requested */
+    box-shadow: 0 5px 15px rgba(44, 62, 80, 0.4); /* Original shadow kept */
     object-fit: cover;
     transition: all 0.4s ease-in-out;
 }
 .profile-pic-img:hover {
     transform: scale(1.03); 
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 15px var(--primary-color); /* Shadow color updated */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 15px var(--primary-color); 
 }
 .profile-desc {
     flex: 2; 
@@ -669,85 +705,90 @@ th {
 
 .fa:hover {
     background: var(--xp-fill-color); /* Hover: Cyan background */
-    color: var(--primary-color);     /* Hover: Dark text */
-    border-color: #ffffff;          /* Hover: White border */
-    box-shadow: 0 0 20px rgba(0, 188, 212, 0.8); /* Stronger glow */
+    color: var(--primary-color); 
+    box-shadow: 0 0 15px rgba(0, 188, 212, 0.8), 0 0 1px #000; 
     transform: scale(1.1);
-    opacity: 1; /* Ensure full visibility on hover */
 }
 
-/* Specific icon rules are removed as they now use the general aesthetic theme. */
+/* Back to Top Button */
+.back-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: var(--primary-color);
+    color: #fff;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid var(--primary-color);
+}
+.back-btn:hover {
+    background: #fff;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
 
-/* Keyframes */
+/* Fade In Animation for Content */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- 📱 RESPONSIVENESS (Media Queries) --- */
-@media (max-width: 1024px) {
+
+/* 📱 RESPONSIVENESS */
+@media (max-width: 1100px) {
     .container {
-        max-width: 95%; 
+        width: 95%; 
     }
 }
 
-@media (max-width:820px) {
-    /* Clocks now centered */
-    .live-clock-output {
-        margin: 10px auto;
-    }
+@media (max-width: 820px) {
+    header { padding: 40px 20px; }
     header h1 { font-size: 30px; }
     header h2 { font-size: 22px; }
     .tab-content { padding: 25px; }
-    
+
     /* Profile layout stacks */
     .profile-layout { flex-direction: column; }
     .profile-desc { text-align: center !important; }
     .profile-pic-container { min-width: 100%; }
-    .profile-pic-img { margin: 0 auto; } 
+    .profile-pic-img { margin: 0 auto; }
 
     /* Education cards stack */
-    .education-card {
-        flex-direction: column;
-    }
-    .education-card-img, .education-card-iframe {
-        width: 100%; 
-    }
+    .education-card { flex-direction: column; }
+    .education-card-img, .education-card-iframe { width: 100%; }
 
     /* Family cards stack */
-    .family-container {
-        gap: 30px;
-    }
-    .family-member {
-        width: 100%;
-        max-width: 300px;
-    }
-    .family-top {
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-    }
+    .family-container { gap: 30px; }
+    .family-member { width: 100%; max-width: 300px; }
+    .family-top { flex-direction: column; align-items: center; gap: 30px; }
+
     /* Skills Grid Stack */
-    .skills-grid {
-        grid-template-columns: 1fr;
+    .skills-grid { grid-template-columns: 1fr; }
+
+    /* Dock Sizing for Mobile - Adjust margin for the top position */
+    .floating-tabs-dock {
+        width: 98%;
+        padding: 6px;
+        margin: -20px auto 20px auto; /* Adjust top margin for mobile */
+        backdrop-filter: blur(8px);
+    }
+    .dock-tab {
+        font-size: 10px;
+        padding: 5px 6px;
+    }
+    .dock-tab:last-child {
+        font-size: 10px; 
+        padding: 5px 6px;
     }
 }
-
 @media (max-width: 480px) {
-    .skill-item-content {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    .skill-title-xp {
-        align-items: center;
-        max-width: 100%;
-    }
+    .skill-item-content { flex-direction: column; align-items: center; text-align: center; }
+    .skill-title-xp { align-items: center; max-width: 100%; }
 }
     </style>
 </head>
 <body>
-    
     <div id="page-loader">
         <div class="loader-spinner"></div>
         <p class="loader-text">Loading Section...</p>
@@ -758,46 +799,33 @@ th {
     </div>
 
     <div class="container" id="top">
-        
         <header>
             <h2>The Wonderfully Weird World of..</h2>
             <h1>Fahmy Izzuddin Bin Fairul Khairi</h1>
             <p>Information Management Student | Science Information</p>
-
             <div class="social-icons">
                 <a href="https://www.instagram.com/ffs.7_7?igsh=eWk4OXl0Znl3Y2Yw" class="fa fa-instagram"></a>
-                <a href="https://wa.me/qr/RNFYZLF6I7VCK1" class="fa fa-whatsapp"></a> 
+                <a href="https://wa.me/qr/RNFYZLF6I7VCK1" class="fa fa-whatsapp"></a>
             </div>
-            
         </header>
-
-        <div class="tabs">
-            <div class="tab active" data-tab="overview">Overview</div>
-            <div class="tab" data-tab="education">Education</div>
-            <div class="tab" data-tab="experience">Experience</div>
-            <div class="tab" data-tab="gallery">Gallery</div>
-            <div class="tab" data-tab="family">Family</div>
+        
+        <div class="floating-tabs-dock">
+            <div class="dock-tab active" data-tab="overview">Overview</div>
+            <div class="dock-tab" data-tab="education">Education</div>
+            <div class="dock-tab" data-tab="experience">Experience</div>
+            <div class="dock-tab" data-tab="gallery">Gallery</div>
+            <div class="dock-tab" data-tab="family">Family</div>
         </div>
 
         <div id="overview" class="tab-content active">
             <h2>Overview</h2>
-
             <div class="profile-layout">
-                
                 <div class="profile-pic-container">
-                    <img 
-                        src="fahmeh PFP.jpg"
-                        alt="Fahmy Izzuddin Profile Picture" 
-                        class="profile-pic-img">
+                    <img src="fahmeh PFP.jpg" alt="Fahmy Izzuddin Profile Picture" class="profile-pic-img">
                 </div>
-
                 <div class="profile-desc">
                     <p class="description-text">
-                        <strong class="text-highlight">Driven by a deep sense of gratitude</strong> for every opportunity. 📜 My personal philosophy is simple:
-                            <strong class="text-highlight">Always be grateful for what I get and to gracefully let go if things didn't go on my way.</strong> This principle fuels my primary goal: to
-                            <strong class="text-highlight">become the best version of myself in every capacity.</strong> 🏅 My purpose extends beyond personal achievement; I strive to make all people around me proud through integrity and commitment.
-                            <strong class="text-highlight"> 💪 I prioritize lifelong wellness</strong>—a commitment to being physically and mentally healthy until the end. I believe that true success is built on
-                            resilience, gratitude, and continuous self-improvement, ensuring a life lived fully and without regret.
+                        <strong class="text-highlight">Driven by a deep sense of gratitude</strong> for every opportunity. 📜 My personal philosophy is simple: <strong class="text-highlight">Always be grateful for what I get and to gracefully let go if things didn't go on my way.</strong> This principle fuels my primary goal: to <strong class="text-highlight">become the best version of myself in every capacity.</strong> 🏅 My purpose extends beyond personal achievement; I strive to make all people around me proud through integrity and commitment. <strong class="text-highlight"> 💪 I prioritize lifelong wellness</strong>—a commitment to being physically and mentally healthy until the end. I believe that true success is built on a foundation of humility and genuine connection with others. 
                     </p>
                 </div>
             </div>
@@ -856,18 +884,14 @@ th {
                 <h3><span style="color:var(--xp-fill-color); margin-right: 10px;">[STATS]</span> My Core Skills (Solo Leveling System)</h3>
                 
                 <div class="skills-grid">
-                    
                     <div class="skill-category">
                         <h4>Information & Data Management 💾</h4>
-                        
+
                         <div class="skill-item">
                             <div class="skill-item-content">
                                 <div class="skill-title-xp"><span>Records Management</span> <span class="skill-level-tag">LVL 7/10</span></div>
                                 <div class="circular-progress-container">
-                                    <div 
-                                        class="circular-progress-bar" 
-                                        style="background: conic-gradient(var(--xp-fill-color) 288deg, var(--xp-bar-bg) 0deg);"
-                                    ></div>
+                                    <div class="circular-progress-bar" style="background: conic-gradient(var(--xp-fill-color) 288deg, var(--xp-bar-bg) 0deg);" ></div>
                                     <span class="progress-value">80%</span>
                                 </div>
                             </div>
@@ -877,24 +901,18 @@ th {
                             <div class="skill-item-content">
                                 <div class="skill-title-xp"><span>Document Archiving (Digital & Physical)</span> <span class="skill-level-tag">LVL 7/10</span></div>
                                 <div class="circular-progress-container">
-                                    <div 
-                                        class="circular-progress-bar" 
-                                        style="background: conic-gradient(var(--xp-fill-color) 252deg, var(--xp-bar-bg) 0deg);"
-                                    ></div>
+                                    <div class="circular-progress-bar" style="background: conic-gradient(var(--xp-fill-color) 252deg, var(--xp-bar-bg) 0deg);" ></div>
                                     <span class="progress-value">70%</span>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="skill-item">
                             <div class="skill-item-content">
                                 <div class="skill-title-xp"><span>Data Entry & Organization</span> <span class="skill-level-tag">LVL 8/10</span></div>
                                 <div class="circular-progress-container">
-                                    <div 
-                                        class="circular-progress-bar" 
-                                        style="background: conic-gradient(var(--xp-fill-color) 324deg, var(--xp-bar-bg) 0deg);"
-                                    ></div>
-                                    <span class="progress-value">70%</span>
+                                    <div class="circular-progress-bar" style="background: conic-gradient(var(--xp-fill-color) 324deg, var(--xp-bar-bg) 0deg);" ></div>
+                                    <span class="progress-value">90%</span>
                                 </div>
                             </div>
                         </div>
@@ -903,10 +921,7 @@ th {
                             <div class="skill-item-content">
                                 <div class="skill-title-xp"><span>Information Confidentiality</span> <span class="skill-level-tag">LVL 6/10</span></div>
                                 <div class="circular-progress-container">
-                                    <div 
-                                        class="circular-progress-bar" 
-                                        style="background: conic-gradient(var(--xp-fill-color) 216deg, var(--xp-bar-bg) 0deg);"
-                                    ></div>
+                                    <div class="circular-progress-bar" style="background: conic-gradient(var(--xp-fill-color) 216deg, var(--xp-bar-bg) 0deg);" ></div>
                                     <span class="progress-value">60%</span>
                                 </div>
                             </div>
@@ -915,97 +930,42 @@ th {
 
                     <div class="skill-category">
                         <h4>Technical Competencies 💻</h4>
-                        
+
                         <div class="skill-item">
                             <div class="skill-item-content">
-                                <div class="skill-title-xp"><span>Microsoft Office Suite (Word, Excel)</span> <span class="skill-level-tag">LVL 7/10</span></div>
+                                <div class="skill-title-xp"><span>Microsoft Office Suite (Word, Excel)</span> <span class="skill-level-tag">LVL 8/10</span></div>
                                 <div class="circular-progress-container">
-                                    <div 
-                                        class="circular-progress-bar" 
-                                        style="background: conic-gradient(var(--xp-fill-color) 270deg, var(--xp-bar-bg) 0deg);"
-                                    ></div>
-                                    <span class="progress-value">75%</span>
+                                    <div class="circular-progress-bar" style="background: conic-gradient(var(--xp-fill-color) 324deg, var(--xp-bar-bg) 0deg);" ></div>
+                                    <span class="progress-value">90%</span>
                                 </div>
                             </div>
                         </div>
-                        
+
+                        <div class="skill-item">
+                            <div class="skill-item-content">
+                                <div class="skill-title-xp"><span>Google Workspace (Docs, Sheets)</span> <span class="skill-level-tag">LVL 7/10</span></div>
+                                <div class="circular-progress-container">
+                                    <div class="circular-progress-bar" style="background: conic-gradient(var(--xp-fill-color) 252deg, var(--xp-bar-bg) 0deg);" ></div>
+                                    <span class="progress-value">70%</span>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="skill-item">
                             <div class="skill-item-content">
                                 <div class="skill-title-xp"><span>Basic HTML/CSS</span> <span class="skill-level-tag">LVL 5/10</span></div>
                                 <div class="circular-progress-container">
-                                    <div 
-                                        class="circular-progress-bar" 
-                                        style="background: conic-gradient(var(--xp-fill-color) 180deg, var(--xp-bar-bg) 0deg);"
-                                    ></div>
+                                    <div class="circular-progress-bar" style="background: conic-gradient(var(--xp-fill-color) 180deg, var(--xp-bar-bg) 0deg);" ></div>
                                     <span class="progress-value">50%</span>
-                            </div>
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="skill-item-content">
-                                <div class="skill-title-xp"><span>Digital Archiving Tools</span> <span class="skill-level-tag">LVL 6/10</span></div>
-                                <div class="circular-progress-container">
-                                    <div 
-                                        class="circular-progress-bar" 
-                                        style="background: conic-gradient(var(--xp-fill-color) 234deg, var(--xp-bar-bg) 0deg);"
-                                    ></div>
-                                    <span class="progress-value">65%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="skill-category">
-                        <h4>Interpersonal & Soft Skills 🤝</h4>
-                        
-                        <div class="skill-item">
-                            <div class="skill-item-content">
-                                <div class="skill-title-xp"><span>Teamwork & Collaboration</span> <span class="skill-level-tag">LVL 8/10</span></div>
-                                <div class="circular-progress-container">
-                                    <div 
-                                        class="circular-progress-bar" 
-                                        style="background: conic-gradient(var(--xp-fill-color) 306deg, var(--xp-bar-bg) 0deg);"
-                                    ></div>
-                                    <span class="progress-value">85%</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="skill-item">
                             <div class="skill-item-content">
-                                <div class="skill-title-xp"><span>Resilience & Persistence</span> <span class="skill-level-tag">LVL 8/10</span></div>
+                                <div class="skill-title-xp"><span>Troubleshooting & Problem-Solving</span> <span class="skill-level-tag">LVL 8/10</span></div>
                                 <div class="circular-progress-container">
-                                    <div 
-                                        class="circular-progress-bar" 
-                                        style="background: conic-gradient(var(--xp-fill-color) 342deg, var(--xp-bar-bg) 0deg);"
-                                    ></div>
-                                    <span class="progress-value">80%</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="skill-item-content">
-                                <div class="skill-title-xp"><span>Time Management</span> <span class="skill-level-tag">LVL 9/10</span></div>
-                                <div class="circular-progress-container">
-                                    <div 
-                                        class="circular-progress-bar" 
-                                        style="background: conic-gradient(var(--xp-fill-color) 252deg, var(--xp-bar-bg) 0deg);"
-                                    ></div>
-                                    <span class="progress-value">95%</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="skill-item-content">
-                                <div class="skill-title-xp"><span>Effective Communication</span> <span class="skill-level-tag">LVL 8/10</span></div>
-                                <div class="circular-progress-container">
-                                    <div 
-                                        class="circular-progress-bar" 
-                                        style="background: conic-gradient(var(--xp-fill-color) 288deg, var(--xp-bar-bg) 0deg);"
-                                    ></div>
+                                    <div class="circular-progress-bar" style="background: conic-gradient(var(--xp-fill-color) 288deg, var(--xp-bar-bg) 0deg);" ></div>
                                     <span class="progress-value">80%</span>
                                 </div>
                             </div>
@@ -1013,8 +973,10 @@ th {
                     </div>
                 </div>
             </div>
+
             <h3 class="text-highlight" style="font-size: 20px; margin-bottom: 15px; margin-top: 60px; text-align: center;"> 👏"Masterpieces" glazer 👏</h3> 
-            <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6BQynL5lCDgv2cYLZ4cuOu?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6BQynL5lCDgv2cYLZ4cuOu?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" class="spotify-player"></iframe>
+
             <div style="margin-top: 50px; text-align: right;">
                 <a href="#top" class="back-btn">Back to Top ↑</a>
             </div>
@@ -1027,7 +989,6 @@ th {
             <div style="display: flex; flex-direction: column; gap: 50px;">
 
                 <div class="education-card">
-                    
                     <div class="education-card-content">
                         <h3 class="text-highlight" style="margin-bottom:8px;">SK Bandar Baru Sri Damansara</h3>
                         <p style="text-align: justify; line-height: 1.8; font-size: 15px;">
@@ -1046,7 +1007,6 @@ th {
                 </div>
 
                 <div class="education-card">
-
                     <img 
                         src="EDUCATION/SK agama.jpeg"
                         alt="KAFA INTEGRASI AL-MUHAJIRIN"
@@ -1064,11 +1024,6 @@ th {
                 </div>
 
                 <div class="education-card">
-                    <img 
-                        src= "smk 2.jpeg"
-                        alt="SMK BANDAR SRI DAMANSARA 2"
-                        class="education-card-img">
-
                     <div class="education-card-content">
                         <h3 class="text-highlight" style="margin-bottom:8px;">SMK Bandar Sri Damansara 2</h3>
                         <p style="text-align: justify; line-height: 1.8; font-size: 15px;">
@@ -1077,6 +1032,11 @@ th {
                             I completed my <b>SPM with 2A 5B 1C</b>, which helped me realize my interest in information management and technology.
                         </p>
                     </div>
+
+                    <img 
+                        src= "smk 2.jpeg"
+                        alt="SMK BANDAR SRI DAMANSARA 2"
+                        class="education-card-img">
                 </div>
 
                 <div class="education-card">
@@ -1335,7 +1295,7 @@ th {
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            // --- CLOCK FUNCTIONALITY (CLEANED) ---
+            // --- CLOCK FUNCTIONALITY ---
             const days = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
 
             function pad(n){ return n.toString().padStart(2,'0'); }
@@ -1352,7 +1312,6 @@ th {
 
                 const text = `${dd}/${mm}/${yy} (${day}) — ${hh}:${min}:${ss}`;
                 
-                // Update all elements with the class 'live-clock-output'
                 document.querySelectorAll(".live-clock-output").forEach(el => {
                     el.textContent = text;
                 });
@@ -1362,13 +1321,12 @@ th {
             setInterval(updateClock,1000);
 
             // ----------------------------------------------------
-            // FIXED: MAIN TAB SWITCHING WITH LOADER (FASTER TRANSITION)
+            // MAIN TAB SWITCHING WITH LOADER (UPDATED SELECTOR)
             // ----------------------------------------------------
-            const tabs = document.querySelectorAll('.tab');
+            const tabs = document.querySelectorAll('.dock-tab'); 
             const contents = document.querySelectorAll('.tab-content');
             const loader = document.getElementById('page-loader');
 
-            // Hide the loader initially
             loader.classList.remove('visible'); 
 
             tabs.forEach(tab => {
@@ -1376,23 +1334,23 @@ th {
                     const targetId = tab.dataset.tab;
                     const targetContent = document.getElementById(targetId);
 
-                    // 1. Show the loader immediately
+                    // Show the loader immediately
                     loader.classList.add('visible');
 
-                    // 2. Use minimal delay (100ms) to allow the visual transition to begin before content is swapped
+                    // Use minimal delay (100ms) for visual transition
                     setTimeout(() => {
-                        // A. Remove 'active' from all main tabs and contents
-                        tabs.forEach(t => t.classList.remove('active'));
+                        // A. Deactivate all tabs and contents (UPDATED SELECTOR)
+                        document.querySelectorAll('.dock-tab').forEach(t => t.classList.remove('active'));
                         contents.forEach(c => c.classList.remove('active'));
                         
-                        // B. Add 'active' to the clicked tab and its corresponding content
-                        tab.classList.add('active');
+                        // B. Activate the clicked tab and content
+                        document.querySelectorAll(`[data-tab="${targetId}"]`).forEach(t => t.classList.add('active'));
                         targetContent.classList.add('active');
 
-                        // C. Hide the loader 
+                        // C. Hide the loader
                         loader.classList.remove('visible');
 
-                    }, 100); // Reduced from 500ms for snappier feel
+                    }, 100); 
                 });
             });
 
@@ -1403,7 +1361,6 @@ th {
             function toggleExperience(targetId, clickedCard) {
                 const targetContent = document.getElementById(targetId);
                 
-                // Find the currently active card and content within the experience dashboard
                 let activeCard = document.querySelector('.exp-category-card.active');
                 let activeContent = document.querySelector('.experience-details.active');
 
