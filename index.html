@@ -24,6 +24,13 @@
     --hover-bg: #2C3E50;
     --hover-text: #ffffff;
     --table-stripe: #ecf0f1; /* Lighter shade of concrete for stripes */
+    
+    /* ADDED: RPG/Solo Leveling Design Colors (Coding Theme) */
+    --rpg-panel-bg: #1A2533; /* Even darker blue-gray for skill panels */
+    --xp-bar-bg: #34495e; 
+    --xp-fill-color: #00bcd4; /* Electric Cyan/Blue for progress/highlights */
+    --xp-level-tag: #ff9800; /* Orange/Yellow for Level Tag */
+    --rpg-border-color: #00bcd4; /* Cyan border highlight */
 }
 
 /* Global Reset and Utilities */
@@ -289,6 +296,136 @@ th {
     box-shadow: 0 8px 20px rgba(44, 62, 80, 0.4); /* Shadow color updated */
 }
 
+/* --- SKILLS SECTION STYLES (SOLO LEVELING / RPG DESIGN) - CODING THEME --- */
+.skills-container {
+    margin-top: 50px;
+    padding: 30px;
+    background: var(--primary-color); 
+    border-radius: 5px; 
+    border: 5px solid var(--rpg-border-color); 
+    box-shadow: 0 0 20px rgba(44, 62, 80, 0.4); 
+    text-align: center;
+}
+.skills-container h3 {
+    color: #ECF0F1;
+    margin-bottom: 25px;
+    font-size: 30px; 
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-family: 'Bebas Neue', sans-serif;
+    border-bottom: 4px solid var(--xp-fill-color); 
+    padding-bottom: 10px;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8); 
+}
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+.skill-category {
+    background: var(--rpg-panel-bg); 
+    padding: 25px; 
+    border-radius: 0; 
+    border: 3px solid var(--accent-color); 
+    box-shadow: 5px 5px 0px #000000; 
+    transition: all 0.2s ease-out;
+}
+.skill-category:hover {
+    transform: translate(-3px, -3px); 
+    box-shadow: 8px 8px 0px var(--rpg-border-color); 
+    border-color: var(--rpg-border-color);
+}
+.skill-category h4 {
+    color: var(--xp-fill-color); 
+    margin-bottom: 20px;
+    font-size: 22px;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--accent-color); 
+    padding-bottom: 8px;
+    letter-spacing: 1px;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+/* XP/HP Bar Styles (Circular) */
+.skill-item {
+    margin-bottom: 25px; 
+    text-align: left;
+    color: #ECF0F1;
+}
+
+.skill-item-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px; /* Added spacing */
+}
+
+.skill-title-xp {
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 0;
+    max-width: calc(100% - 80px); /* Ensures text doesn't push the circle too far */
+}
+
+.skill-title-xp > span:first-child {
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: 'Bebas Neue', sans-serif; 
+    letter-spacing: 1px;
+    line-height: 1.1;
+}
+
+.skill-level-tag {
+    font-size: 14px;
+    background-color: var(--xp-level-tag); 
+    color: #000; 
+    padding: 3px 8px; 
+    border: 1px solid #000;
+    font-family: 'Monospace', sans-serif; 
+    letter-spacing: 0;
+    box-shadow: 1px 1px 0px rgba(0,0,0,0.5); 
+    margin-top: 5px; 
+}
+
+/* Circular Progress Bar Components (CLEANED) */
+.circular-progress-container {
+    position: relative;
+    height: 65px; /* Smaller, cleaner size */
+    width: 65px;
+    border-radius: 50%;
+    /* Dark background and cyan border */
+    background: var(--xp-bar-bg);
+    border: 3px solid var(--rpg-border-color); 
+    box-shadow: 0 0 8px rgba(44, 62, 80, 0.4); /* Stronger glow */
+    flex-shrink: 0; /* Prevents stretching/shrinking */
+}
+
+.circular-progress-bar {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    /* Creates a cleaner donut hole: transparent area is 55% of radius, fill starts at 75% */
+    mask: radial-gradient(closest-side, transparent 55%, #fff 75%); 
+    transition: background 0.5s ease-out; 
+}
+
+.progress-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 13px; /* Adjusted size */
+    font-weight: 700;
+    font-family: 'Monospace', sans-serif;
+    text-shadow: 0 0 4px var(--xp-fill-color);
+    z-index: 2;
+}
+
 /* --- EDUCATION Specific Styles --- */
 .education-card {
     display: flex; 
@@ -501,38 +638,45 @@ th {
     letter-spacing: 1px;
 }
 
-/* Social Media Icon Styles */
+/* --- Aesthetic Social Media Icon Styles (Themed) --- */
 .social-icons {
     text-align: center; 
     margin-top: 15px;
 }
 
 .fa {
-    padding: 15px;      
-    font-size: 24px;    
-    width: 50px;       
+    padding: 15px;       
+    font-size: 24px;     
+    width: 50px;       
+    height: 50px; /* Ensure perfect circle */
     text-align: center; 
     text-decoration: none; 
-    margin: 0 5px;      
+    margin: 0 8px;       
     border-radius: 50%; 
-    color: white;       
-    display: inline-block;
-    transition: opacity 0.3s, transform 0.3s;
+    
+    /* Themed Style: Dark background, Cyan/Accent highlight */
+    background: var(--primary-color); /* Dark Blue/Gray */
+    color: var(--xp-fill-color);     /* Electric Cyan */
+    border: 2px solid var(--xp-fill-color); /* Cyan border */
+
+    display: inline-flex; /* Use flex to easily center the icon */
+    align-items: center;
+    justify-content: center;
+    
+    box-shadow: 0 0 10px rgba(0, 188, 212, 0.4); /* Subtle glow */
+    transition: all 0.3s ease; /* Updated transition for all properties */
 }
 
 .fa:hover {
-    opacity: 0.8;
-    transform: scale(1.05);
+    background: var(--xp-fill-color); /* Hover: Cyan background */
+    color: var(--primary-color);     /* Hover: Dark text */
+    border-color: #ffffff;          /* Hover: White border */
+    box-shadow: 0 0 20px rgba(0, 188, 212, 0.8); /* Stronger glow */
+    transform: scale(1.1);
+    opacity: 1; /* Ensure full visibility on hover */
 }
 
-.fa-instagram {
-    /* Kept original gradient as it is standard for Instagram, changing base color might break recognition */
-    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-}
-
-.fa-whatsapp {
-    background-color: #25d366; /* Kept standard WhatsApp color */
-}
+/* Specific icon rules are removed as they now use the general aesthetic theme. */
 
 /* Keyframes */
 @keyframes fadeIn {
@@ -582,6 +726,22 @@ th {
         flex-direction: column;
         align-items: center;
         gap: 30px;
+    }
+    /* Skills Grid Stack */
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .skill-item-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .skill-title-xp {
+        align-items: center;
+        max-width: 100%;
     }
 }
     </style>
@@ -692,6 +852,167 @@ th {
                 </table>
             </div>
 
+            <div class="skills-container">
+                <h3><span style="color:var(--xp-fill-color); margin-right: 10px;">[STATS]</span> My Core Skills (Solo Leveling System)</h3>
+                
+                <div class="skills-grid">
+                    
+                    <div class="skill-category">
+                        <h4>Information & Data Management 💾</h4>
+                        
+                        <div class="skill-item">
+                            <div class="skill-item-content">
+                                <div class="skill-title-xp"><span>Records Management</span> <span class="skill-level-tag">LVL 7/10</span></div>
+                                <div class="circular-progress-container">
+                                    <div 
+                                        class="circular-progress-bar" 
+                                        style="background: conic-gradient(var(--xp-fill-color) 288deg, var(--xp-bar-bg) 0deg);"
+                                    ></div>
+                                    <span class="progress-value">80%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-item-content">
+                                <div class="skill-title-xp"><span>Document Archiving (Digital & Physical)</span> <span class="skill-level-tag">LVL 7/10</span></div>
+                                <div class="circular-progress-container">
+                                    <div 
+                                        class="circular-progress-bar" 
+                                        style="background: conic-gradient(var(--xp-fill-color) 252deg, var(--xp-bar-bg) 0deg);"
+                                    ></div>
+                                    <span class="progress-value">70%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-item-content">
+                                <div class="skill-title-xp"><span>Data Entry & Organization</span> <span class="skill-level-tag">LVL 8/10</span></div>
+                                <div class="circular-progress-container">
+                                    <div 
+                                        class="circular-progress-bar" 
+                                        style="background: conic-gradient(var(--xp-fill-color) 324deg, var(--xp-bar-bg) 0deg);"
+                                    ></div>
+                                    <span class="progress-value">70%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-item-content">
+                                <div class="skill-title-xp"><span>Information Confidentiality</span> <span class="skill-level-tag">LVL 6/10</span></div>
+                                <div class="circular-progress-container">
+                                    <div 
+                                        class="circular-progress-bar" 
+                                        style="background: conic-gradient(var(--xp-fill-color) 216deg, var(--xp-bar-bg) 0deg);"
+                                    ></div>
+                                    <span class="progress-value">60%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h4>Technical Competencies 💻</h4>
+                        
+                        <div class="skill-item">
+                            <div class="skill-item-content">
+                                <div class="skill-title-xp"><span>Microsoft Office Suite (Word, Excel)</span> <span class="skill-level-tag">LVL 7/10</span></div>
+                                <div class="circular-progress-container">
+                                    <div 
+                                        class="circular-progress-bar" 
+                                        style="background: conic-gradient(var(--xp-fill-color) 270deg, var(--xp-bar-bg) 0deg);"
+                                    ></div>
+                                    <span class="progress-value">75%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-item-content">
+                                <div class="skill-title-xp"><span>Basic HTML/CSS</span> <span class="skill-level-tag">LVL 5/10</span></div>
+                                <div class="circular-progress-container">
+                                    <div 
+                                        class="circular-progress-bar" 
+                                        style="background: conic-gradient(var(--xp-fill-color) 180deg, var(--xp-bar-bg) 0deg);"
+                                    ></div>
+                                    <span class="progress-value">50%</span>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-item-content">
+                                <div class="skill-title-xp"><span>Digital Archiving Tools</span> <span class="skill-level-tag">LVL 6/10</span></div>
+                                <div class="circular-progress-container">
+                                    <div 
+                                        class="circular-progress-bar" 
+                                        style="background: conic-gradient(var(--xp-fill-color) 234deg, var(--xp-bar-bg) 0deg);"
+                                    ></div>
+                                    <span class="progress-value">65%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>Interpersonal & Soft Skills 🤝</h4>
+                        
+                        <div class="skill-item">
+                            <div class="skill-item-content">
+                                <div class="skill-title-xp"><span>Teamwork & Collaboration</span> <span class="skill-level-tag">LVL 8/10</span></div>
+                                <div class="circular-progress-container">
+                                    <div 
+                                        class="circular-progress-bar" 
+                                        style="background: conic-gradient(var(--xp-fill-color) 306deg, var(--xp-bar-bg) 0deg);"
+                                    ></div>
+                                    <span class="progress-value">85%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-item-content">
+                                <div class="skill-title-xp"><span>Resilience & Persistence</span> <span class="skill-level-tag">LVL 8/10</span></div>
+                                <div class="circular-progress-container">
+                                    <div 
+                                        class="circular-progress-bar" 
+                                        style="background: conic-gradient(var(--xp-fill-color) 342deg, var(--xp-bar-bg) 0deg);"
+                                    ></div>
+                                    <span class="progress-value">80%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-item-content">
+                                <div class="skill-title-xp"><span>Time Management</span> <span class="skill-level-tag">LVL 9/10</span></div>
+                                <div class="circular-progress-container">
+                                    <div 
+                                        class="circular-progress-bar" 
+                                        style="background: conic-gradient(var(--xp-fill-color) 252deg, var(--xp-bar-bg) 0deg);"
+                                    ></div>
+                                    <span class="progress-value">95%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-item-content">
+                                <div class="skill-title-xp"><span>Effective Communication</span> <span class="skill-level-tag">LVL 8/10</span></div>
+                                <div class="circular-progress-container">
+                                    <div 
+                                        class="circular-progress-bar" 
+                                        style="background: conic-gradient(var(--xp-fill-color) 288deg, var(--xp-bar-bg) 0deg);"
+                                    ></div>
+                                    <span class="progress-value">80%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <h3 class="text-highlight" style="font-size: 20px; margin-bottom: 15px; margin-top: 60px; text-align: center;"> 👏"Masterpieces" glazer 👏</h3> 
             <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6BQynL5lCDgv2cYLZ4cuOu?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             <div style="margin-top: 50px; text-align: right;">
@@ -1120,7 +1441,3 @@ th {
     </script>
 </body>
 </html>
-
-
-
-
